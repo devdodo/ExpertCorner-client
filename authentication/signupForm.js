@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { signup as signupApi } from "../services/apiAuth";
+import supabase from "../services/supabase";
 import { useRouter } from "next/router";
 
 const SingUpForm = () => {
@@ -43,9 +44,24 @@ const SingUpForm = () => {
 
         try {
             const user = await signupApi({ fullName, email, password });
+            console.log("Successful Sign up");
+            console.log(user.user);
+
+            const data = {
+                fullName,
+                email,
+                UID: user.user.id
+            }
+            const { error } = await supabase.from("clients").insert(data);
+            if (error) {
+                console.log(error.message);
+            }else{
+                console.log("Insertion successful");
+                router.push("/signin", { replace: true });
+            }
+
             // Handle successful login, e.g., store user data in state or context
             // queryClient.setQueryData(["user"], user.user);
-            router.push("/signin", { replace: true });
           } catch (err) {
             setErrorMessage("User creation was unsuccessful!");
             setLoginError(true);
@@ -96,7 +112,7 @@ const SingUpForm = () => {
                     <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Accept Terms and Conditions</label>
                 </div>
                 <div>
-                    <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 py-4 px-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+                    <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 py-4 px-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign Up</button>
                 </div>
             </form>
         </>
