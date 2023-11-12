@@ -11,22 +11,27 @@ import benefitOneImg from "../public/img/benefit-one.png";
 import benefitTwoImg from "../public/img/benefit-two.png";
 
 const benefitOne = {
-  title: "Highlight your benefits",
-  desc: "You can use this space to highlight your first benefit or a feature of your product. It can also contain an image or Illustration like in the example along with some bullet points.",
+  title: "Find Professionals Near you",
+  desc: "Looking for the perfect vendor to meet your needs? It's as easy as 1-2-3 on our platform, find the right vendor today and make your projects a breeze.",
   image: benefitOneImg,
   bullets: [
     {
-      title: "Understand your customers",
+      title: "Teachers",
       desc: "Then explain the first point breifly in one or two lines.",
       icon: <FaceSmileIcon />,
     },
     {
-      title: "Improve acquisition",
+      title: "Engineers",
       desc: "Here you can add the next benefit point.",
       icon: <ChartBarSquareIcon />,
     },
     {
-      title: "Drive customer retention",
+      title: "Tailors",
+      desc: "This will be your last bullet point in this section.",
+      icon: <CursorArrowRaysIcon />,
+    },
+    {
+      title: "Plumbers",
       desc: "This will be your last bullet point in this section.",
       icon: <CursorArrowRaysIcon />,
     },
