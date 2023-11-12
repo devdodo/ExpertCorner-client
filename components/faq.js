@@ -35,8 +35,8 @@ const Faq = () => {
 
 const faqdata = [
   {
-    question: "Is this template completely free to use?",
-    answer: "Yes, this template is completely free to use.",
+    question: "What kind of Service can I get on this platform?",
+    answer: "You can get services cutting across different sectors.",
   },
   {
     question: "Can I use it in a commercial project?",
