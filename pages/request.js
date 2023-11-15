@@ -1,16 +1,19 @@
 import Head from "next/head";
-import Dashboard from "../components/dashboard/request"
+import Request from "../components/dashboard/request"
+import isAuthenticated from "../authentication/authenticate"
 
 const SignIn = () => {
-  return (
-    <>
-      <Head>
-        <title>Expert Corner - Client Dashboard</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Dashboard />
-    </>
-  );
+    const user = isAuthenticated();
+
+    return (
+        <>
+        <Head>
+            <title>Expert Corner - Client Dashboard</title>
+            <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <Request user={user} index={1} />
+        </>
+    );
 }
 
 export default SignIn;

@@ -1,31 +1,40 @@
 import { useState } from "react";
 import { login as loginApi } from "../services/apiAuth";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { login } from "../utilities/slices/userSlice";
+import Loader from "../utilities/loader";
 
 const LoginForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loginError, setLoginError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
+    const dispatch = useDispatch();
+
     const handleSubmit = async (e) => {
+        setLoading(true);
         e.preventDefault();
         if (email == "" || password == "" ) {
             setErrorMessage("Please enter all inputs below");
             setLoginError(true);
-
+            setLoading(false);
             return;
         }
 
         try {
             const user = await loginApi({ email, password });
-            // Handle successful login, e.g., store user data in state or context
-            // queryClient.setQueryData(["user"], user.user);
-            router.push("/dashboard", { replace: true });
+            if(user.user != null){
+                dispatch(login(user.user))
+            }
+            router.push("/dashboard", "/dashboard");
           } catch (err) {
             setErrorMessage("Invalid Username and Password");
             setLoginError(true);
+            setLoading(false);
             // Handle login error, e.g., show an error message
             // toast.error("Provided email or password are incorrect");
           }
@@ -63,7 +72,7 @@ const LoginForm = () => {
                 </div>
 
                 <div>
-                    <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 py-4 px-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+                    <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 py-4 px-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{loading ? <Loader /> : "Sign In"}</button>
                 </div>
             </form>
         </>
