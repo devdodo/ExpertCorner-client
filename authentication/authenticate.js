@@ -6,11 +6,11 @@ import { useRouter } from "next/router";
 const isAuthenticated = () => {
     const user = useSelector(selectUser);
     const checkAuth = user.isAuthenticated;
+    const router = useRouter();
     
     useEffect(() => {
-        if(!checkAuth){
-            const router = useRouter();
-            router.push("/signin", "/singin");
+        if(checkAuth == false){
+            router.push("/signin", "/signin");
         }
     }, [])
 

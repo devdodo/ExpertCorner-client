@@ -13,6 +13,7 @@ const Aside = ({index}) => {
     const handleLogout = () => {
         dispatch(logout());
         router.push("/signin", "/signin");
+        return;
     }
 
     const nav = [
@@ -69,7 +70,7 @@ const Aside = ({index}) => {
                         {row.title}
                     </Link>
                 ))}
-                <div onClick={handleLogout} className="flex items-center text-md  text-gray-500 hover:bg-gray-100 hover:text-indigo-500 py-4 pl-6 div-item mb-2">
+                <div onClick={handleLogout} className="flex items-center text-md cursor-pointer text-gray-500 hover:bg-gray-100 hover:text-indigo-500 py-4 pl-6 div-item mb-2">
                     <FaSignOutAlt className="text-xl mr-3 " />
                     Logout
                 </div>

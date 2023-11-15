@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import supabase from "../../services/supabase";
 
 const RequestTable = ({user}) => {
     const [requestRows, setRequestRows] = useState([])
-    const [userId, setUserId] = useState(0)
+    const [userId, setUserId] = useState(4)
 
     useEffect(() => {
 
@@ -58,8 +59,8 @@ const RequestTable = ({user}) => {
                         </tr> 
                         :
                         requestRows.map((row, index) => (
-                            <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <tr key={index} className="bg-white border-b dark:bg-gray-700 dark:border-gray-700 font-bold">
+                                <th scope="row" className="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                                     {row.cabins.name}
                                 </th>
                                 <td className="px-6 py-4">
@@ -75,7 +76,9 @@ const RequestTable = ({user}) => {
                                     {row.status}
                                 </td>
                                 <td className="px-6 py-4">
-                                    <p>View More</p>
+                                    <Link href="/singlerequest" className="bg-indigo-700 hover:bg-indigo-900 py-1 px-6 rounded text-white">
+                                        View
+                                    </Link>
                                 </td>
                             </tr>
                         ))}

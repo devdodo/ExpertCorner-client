@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import supabase, { supabaseUrl } from "../../services/supabase";
+import supabase from "../../services/supabase";
 
 const RequestForm = () => {
     const [startDate, setStartDate] = useState("")

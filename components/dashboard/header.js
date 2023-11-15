@@ -1,7 +1,24 @@
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { FaBars, FaUserCircle } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../utilities/slices/userSlice";
+import { useRouter } from "next/router";
 
-const Header = ({user}) => {
+
+const Header = () => {
+    const user = useSelector(selectUser);
+    const checkAuth = user.isAuthenticated;
+    const router = useRouter();
+    
+    console.log(user)
+
+    useEffect(() => {
+        if(checkAuth == false){
+            router.push("/signin", "/signin");
+        }
+    }, [])
+
     return (
         <>
             <div className="h-20 bg-white py-2 px-6 border-b border-b-slate-200">
@@ -13,7 +30,7 @@ const Header = ({user}) => {
                     </div>
                     <div className="pt-3 hidden md:block">
                         <div className="flex">
-                            <div className="text-md font-semibold text-gray-500 mr-4">{user.user.user_metadata.fullName     }</div>
+                            <div className="text-md font-semibold text-gray-500 mr-4">{user.user !== null?user.user.user_metadata.fullName:"" }</div>
                             <div>
                                 <FaUserCircle className="text-3xl text-gray-600" />
                             </div>
