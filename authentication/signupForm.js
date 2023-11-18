@@ -2,6 +2,7 @@ import { useState } from "react";
 import { signup as signupApi } from "../services/apiAuth";
 import supabase from "../services/supabase";
 import { useRouter } from "next/router";
+import Loader from "../utilities/loader";
 
 const SingUpForm = () => {
     const [fullName, setFullName] = useState("");
@@ -10,13 +11,17 @@ const SingUpForm = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [loginError, setLoginError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+
         if (email == "" || fullName == "" || password == "" || confirmPassword == "" ) {
             setErrorMessage("Please enter all inputs below");
             setLoginError(true);
+            setLoading(false);
 
             return;
         }
@@ -24,6 +29,7 @@ const SingUpForm = () => {
         if (fullName.length < 4) {
             setErrorMessage("Full Name cannot be less than four characters");
             setLoginError(true);
+            setLoading(false);
 
             return;
         }
@@ -31,6 +37,7 @@ const SingUpForm = () => {
         if (password.length < 8) {
             setErrorMessage("Password cannot be less than 8 characters");
             setLoginError(true);
+            setLoading(false);
 
             return;
         }
@@ -38,6 +45,7 @@ const SingUpForm = () => {
         if (password !== confirmPassword) {
             setErrorMessage("Passwords do not match!");
             setLoginError(true);
+            setLoading(false);
 
             return;
         }
@@ -54,6 +62,7 @@ const SingUpForm = () => {
             }
             const { error } = await supabase.from("clients").insert(data);
             if (error) {
+                setLoading(false);
                 console.log(error.message);
             }else{
                 console.log("Insertion successful");
@@ -109,10 +118,10 @@ const SingUpForm = () => {
 
                 <div class="flex items-center mb-4">
                     <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                    <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Accept Terms and Conditions</label>
+                    <label htmlFor="default-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Accept Terms and Conditions</label>
                 </div>
                 <div>
-                    <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 py-4 px-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign Up</button>
+                    <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 py-4 px-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{loading ? <Loader /> : "Sign Up"}</button>
                 </div>
             </form>
         </>

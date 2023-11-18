@@ -35,12 +35,12 @@ const Aside = ({index}) => {
             icon: <FaUser className="text-xl mr-3" />,
             active: false
         },
-        {
-            title: "Settings",
-            link: "/settings",
-            icon: <FaCog className="text-xl mr-3" />,
-            active: false
-        }
+        // {
+        //     title: "Settings",
+        //     link: "/settings",
+        //     icon: <FaCog className="text-xl mr-3" />,
+        //     active: false
+        // }
     ]
 
     nav[index].active = true
@@ -71,7 +71,7 @@ const Aside = ({index}) => {
                     </Link>
                 ))}
                 <div onClick={handleLogout} className="flex items-center text-md cursor-pointer text-gray-500 hover:bg-gray-100 hover:text-indigo-500 py-4 pl-6 div-item mb-2">
-                    <FaSignOutAlt className="text-xl mr-3 " />
+                    <FaSignOutAlt className="text-xl mr-3" />
                     Logout
                 </div>
             </div>

@@ -1,8 +1,8 @@
 import Head from "next/head";
-import Request from "../components/dashboard/request"
+import Profile from "../components/dashboard/profile"
 import isAuthenticated from "../authentication/authenticate"
 
-const UserRequest = () => {
+const UserProfile = () => {
     const user = isAuthenticated();
 
     return (
@@ -11,9 +11,9 @@ const UserRequest = () => {
             <title>Expert Corner - Client Dashboard</title>
             <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Request user={user} index={1} />
+        <Profile user={user} index={2} />
         </>
     );
 }
 
-export default UserRequest;
+export default UserProfile;

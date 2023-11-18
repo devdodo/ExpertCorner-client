@@ -6,11 +6,14 @@ import { selectUser } from "../../utilities/slices/userSlice";
 
 
 const Cards = () => {
-    const user = useSelector(selectUser);
+    const userData = useSelector(selectUser);
     const [allRequests, setAllRequests] = useState(0);
     const [confirmed, setConfirmed] = useState(0);
     const [totalSpent, setTotalSpent] = useState("");
     const [topService, setTopService] = useState("");
+
+    const {user, isAuthenticated} = userData;
+    const [{id}] = user
 
     useEffect(() => {
         const getRequest = async (id) => {
@@ -27,33 +30,36 @@ const Cards = () => {
             const confirmed = data.filter((data) => data.status === "checked-out")
             let totalPrice = 0;
             let serviceArray = [];
-            confirmed.forEach((val) => {
-                totalPrice += val.totalPrice
-            })
-            data.forEach((val) => {
-                serviceArray.push(val.cabins.name)
-            })
+            let topServiceVar = "Nill"
 
-            const mode = (arr) => {
-                return arr.sort((a,b) =>
-                      arr.filter(v => v===a).length
-                    - arr.filter(v => v===b).length
-                ).pop();
+            if(data.length > 0) {
+                confirmed.forEach((val) => {
+                    totalPrice += val.totalPrice
+                })
+                data.forEach((val) => {
+                    serviceArray.push(val.cabins.name)
+                })
+    
+                const mode = (arr) => {
+                    return arr.sort((a,b) =>
+                          arr.filter(v => v===a).length
+                        - arr.filter(v => v===b).length
+                    ).pop();
+                }
+
+                topServiceVar = mode(serviceArray)
             }
             
             setAllRequests(data.length)
             setConfirmed(confirmed.length)
             setTotalSpent(totalPrice)
-            setTopService(mode(serviceArray))
-
-            console.log(data)
+            setTopService(topServiceVar)
         }
 
-        getRequest(4);
+        
+        getRequest(id);
 
     }, []);
-    
-    console.log(allRequests)
 
     return (
         <div className="w-[90%] sm:w-[80%]  mt-9 mx-auto">

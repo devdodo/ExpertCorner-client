@@ -1,4 +1,5 @@
 import Container from './container';
+import Link from 'next/link'
 import LoginForm from '../authentication/loginForm';
 
 const SignInForm = () => {
@@ -16,7 +17,7 @@ const SignInForm = () => {
 
                         <p className="mt-10 text-center text-sm text-gray-500">
                         Not a member?
-                        <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Click here to register</a>
+                        <Link href="/signup" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Click here to register</Link>
                         </p>
                     </div>
                     </div>

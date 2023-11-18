@@ -1,8 +1,8 @@
 import Head from "next/head";
-import Request from "../components/dashboard/request"
-import isAuthenticated from "../authentication/authenticate"
+import RequestView from "../../components/dashboard/request/view"
+import isAuthenticated from "../../authentication/authenticate"
 
-const UserRequest = () => {
+const SignIn = () => {
     const user = isAuthenticated();
 
     return (
@@ -11,9 +11,9 @@ const UserRequest = () => {
             <title>Expert Corner - Client Dashboard</title>
             <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Request user={user} index={1} />
+        <RequestView user={user} index={1} />
         </>
     );
 }
 
-export default UserRequest;
+export default SignIn;

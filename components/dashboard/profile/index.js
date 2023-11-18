@@ -1,9 +1,8 @@
 import Aside from '../aside';
 import Header from '../header';
-import RequestForm from '../requestForm';
-import RequestTable from '../requestTable';
+import EditForm from '../editForm';
 
-const Request = ({user, index}) => {
+const EditProfile = ({user, index}) => {
     return(
         <div className=" w-full h-full bg-gray-100">
             <div className="flex">
@@ -14,13 +13,9 @@ const Request = ({user, index}) => {
                     <Header user={user} />
                     <div className="pt-20">
                         <div className="w-[90%] sm:w-[80%] mt-9 mx-auto">
-                            <h1 className="text-3xl text-gray-700 font-bold">Request Form</h1>
+                            <h1 className="text-3xl text-gray-700 font-bold">Edit Profile</h1>
                         </div>
-                        <RequestForm />
-                        <div className="w-[90%] sm:w-[80%] mt-9 mx-auto">
-                            <h1 className="text-xl text-gray-700 font-bold">Recent Requests</h1>
-                        </div>
-                        <RequestTable user={user}/>
+                        <EditForm />
                     </div>
                 </div>
             </div>
@@ -28,4 +23,4 @@ const Request = ({user, index}) => {
     )
 }
 
-export default Request;
+export default EditProfile;

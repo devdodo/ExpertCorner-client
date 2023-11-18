@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { login as loginApi } from "../services/apiAuth";
+import { login as loginApi, logClient as clientLogin } from "../services/apiAuth";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { login } from "../utilities/slices/userSlice";
 import Loader from "../utilities/loader";
+import supabase from "../services/supabase";
 
 const LoginForm = () => {
     const [email, setEmail] = useState("");
@@ -28,9 +29,20 @@ const LoginForm = () => {
         try {
             const user = await loginApi({ email, password });
             if(user.user != null){
-                dispatch(login(user.user))
+                const { data, error } = await supabase
+                .from("clients")
+                .select("id,email,fullName,UID")
+                .eq("email", email);
+            
+                if (error) {
+                console.error(error);
+                throw new Error("Request not found"); 
+                }
+
+                dispatch(login(data))
             }
             router.push("/dashboard", "/dashboard");
+
           } catch (err) {
             setErrorMessage("Invalid Username and Password");
             setLoginError(true);
