@@ -4,6 +4,9 @@ import Loader from "../../utilities/loader";
 import supabase from "../../services/supabase";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../utilities/slices/userSlice";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const RequestForm = () => {
     const userSlice = useSelector(selectUser);
@@ -55,10 +58,15 @@ const RequestForm = () => {
         if (error) {
             console.error(error);
             setLoading(false);
-            throw new Error("Booking could not be updated");
+            toast.error("An Error Occured try again.", {
+                position: toast.POSITION.TOP_CENTER
+            });
         }
 
         setLoading(false);
+        toast.success("Profile updated successfully.", {
+            position: toast.POSITION.TOP_CENTER
+        });
         return data;
     }
 
@@ -69,6 +77,7 @@ const RequestForm = () => {
         const obj = {
             phoneNumber: phone,
             bvn,
+            stateOfResidence: location,
             NIN: nin
         }
 
@@ -143,6 +152,7 @@ const RequestForm = () => {
                 </form>
             </div>
             : "Waiting"}
+            <ToastContainer />
         </div>
     )
 }

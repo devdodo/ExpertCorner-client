@@ -13,7 +13,7 @@ const Cards = () => {
     const [topService, setTopService] = useState("");
 
     const {user, isAuthenticated} = userData;
-    const [{id}] = user
+    const [{id}] = user !== null? user: 0
 
     useEffect(() => {
         const getRequest = async (id) => {
@@ -27,7 +27,7 @@ const Cards = () => {
               throw new Error("Request not found");
             }
 
-            const confirmed = data.filter((data) => data.status === "checked-out")
+            const confirmed = data.filter((data) => data.status === "checked-in")
             let totalPrice = 0;
             let serviceArray = [];
             let topServiceVar = "Nill"

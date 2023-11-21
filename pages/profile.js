@@ -1,9 +1,11 @@
 import Head from "next/head";
 import Profile from "../components/dashboard/profile"
-import isAuthenticated from "../authentication/authenticate"
+import { useSelector } from "react-redux";
+import { selectUser } from "../utilities/slices/userSlice";
 
 const UserProfile = () => {
-    const user = isAuthenticated();
+    const user = useSelector(selectUser);
+    const checkAuth = user.isAuthenticated;
 
     return (
         <>
@@ -11,7 +13,10 @@ const UserProfile = () => {
             <title>Expert Corner - Client Dashboard</title>
             <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Profile user={user} index={2} />
+        {checkAuth ?
+        <Profile index={2} />
+       :
+       ""}
         </>
     );
 }
