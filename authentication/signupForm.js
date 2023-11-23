@@ -3,6 +3,8 @@ import { signup as signupApi } from "../services/apiAuth";
 import supabase from "../services/supabase";
 import { useRouter } from "next/router";
 import Loader from "../utilities/loader";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SingUpForm = () => {
     const [fullName, setFullName] = useState("");
@@ -19,7 +21,9 @@ const SingUpForm = () => {
         setLoading(true);
 
         if (email == "" || fullName == "" || password == "" || confirmPassword == "" ) {
-            setErrorMessage("Please enter all inputs below");
+            toast.error("Please enter all inputs below", {
+                position: toast.POSITION.TOP_CENTER
+            });
             setLoginError(true);
             setLoading(false);
 
@@ -27,7 +31,9 @@ const SingUpForm = () => {
         }
 
         if (fullName.length < 4) {
-            setErrorMessage("Full Name cannot be less than four characters");
+            toast.error("Full Name cannot be less than four characters", {
+                position: toast.POSITION.TOP_CENTER
+            });
             setLoginError(true);
             setLoading(false);
 
@@ -35,7 +41,9 @@ const SingUpForm = () => {
         }
 
         if (password.length < 8) {
-            setErrorMessage("Password cannot be less than 8 characters");
+            toast.error("Password cannot be less than 8 characters", {
+                position: toast.POSITION.TOP_CENTER
+            });
             setLoginError(true);
             setLoading(false);
 
@@ -43,7 +51,9 @@ const SingUpForm = () => {
         }
 
         if (password !== confirmPassword) {
-            setErrorMessage("Passwords do not match!");
+            toast.error("Passwords do not match!", {
+                position: toast.POSITION.TOP_CENTER
+            });
             setLoginError(true);
             setLoading(false);
 
@@ -65,15 +75,20 @@ const SingUpForm = () => {
                 setLoading(false);
                 console.log(error.message);
             }else{
-                console.log("Insertion successful");
+                toast.success("User created successfully", {
+                    position: toast.POSITION.TOP_CENTER
+                });
                 router.push("/signin", { replace: true });
             }
 
             // Handle successful login, e.g., store user data in state or context
             // queryClient.setQueryData(["user"], user.user);
           } catch (err) {
-            setErrorMessage("User creation was unsuccessful!");
+            toast.error("User creation was unsuccessful!", {
+                position: toast.POSITION.TOP_CENTER
+            });
             setLoginError(true);
+            setLoading(false);
             // Handle login error, e.g., show an error message
             // toast.error("Provided email or password are incorrect");
           }
@@ -83,15 +98,6 @@ const SingUpForm = () => {
         <>
             <form className="space-y-6
             " onSubmit={handleSubmit}>
-                {loginError ? 
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                        <strong className="font-bold">SignUp Error: </strong>
-                        <span className="block sm:inline">{errorMessage}</span>
-                        <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
-                        <svg className="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-                        </span>
-                    </div>
-                : ""}
                 <div>
                     <div className="mt-4 mb-4">
                         <label htmlFor="fullname" className="block text-md font-medium leading-6 text-gray-700 mb-2">Full Name</label>
@@ -124,6 +130,7 @@ const SingUpForm = () => {
                     <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 py-4 px-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{loading ? <Loader /> : "Sign Up"}</button>
                 </div>
             </form>
+            <ToastContainer />
         </>
     )
 }

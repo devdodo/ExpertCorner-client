@@ -1,10 +1,13 @@
 import { useState } from "react";
+import Link from 'next/link';
 import { login as loginApi, logClient as clientLogin } from "../services/apiAuth";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { login } from "../utilities/slices/userSlice";
 import Loader from "../utilities/loader";
 import supabase from "../services/supabase";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginForm = () => {
     const [email, setEmail] = useState("");
@@ -20,7 +23,9 @@ const LoginForm = () => {
         setLoading(true);
         e.preventDefault();
         if (email == "" || password == "" ) {
-            setErrorMessage("Please enter all inputs below");
+            toast.error("Please enter all inputs below", {
+                position: toast.POSITION.TOP_CENTER
+            });
             setLoginError(true);
             setLoading(false);
             return;
@@ -36,7 +41,9 @@ const LoginForm = () => {
             
                 if (error) {
                 console.error(error);
-                throw new Error("Request not found"); 
+                toast.error("Invalid username and password", {
+                    position: toast.POSITION.TOP_CENTER
+                });
                 }
 
                 dispatch(login(data))
@@ -44,26 +51,17 @@ const LoginForm = () => {
             router.push("/dashboard", "/dashboard");
 
           } catch (err) {
-            setErrorMessage("Invalid Username and Password");
+            toast.error("Invalid username and password", {
+                position: toast.POSITION.TOP_CENTER
+            });
             setLoginError(true);
             setLoading(false);
-            // Handle login error, e.g., show an error message
-            // toast.error("Provided email or password are incorrect");
           }
     }
 
     return(
         <>
             <form className="space-y-6" onSubmit={handleSubmit}>
-                {loginError ? 
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                        <strong className="font-bold">Login Error: </strong>
-                        <span className="block sm:inline">{errorMessage}</span>
-                        <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
-                        <svg className="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-                        </span>
-                    </div>
-                : ""}
                 <div>
                     <div className="mt-4 mb-4">
                         <label htmlFor="email" className="block text-md font-medium leading-6 text-gray-700 mb-2">Email address</label>
@@ -75,7 +73,7 @@ const LoginForm = () => {
                     <div className="flex items-center justify-between">
                         <label htmlFor="password" className="block text-md font-medium leading-6 text-gray-700 mb-2">Password</label>
                         <div className="text-sm">
-                            <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
+                            <Link href="/forgotPassword" className="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</Link>
                         </div>
                     </div>
                     <div className="mt-2">
@@ -87,6 +85,7 @@ const LoginForm = () => {
                     <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 py-4 px-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{loading ? <Loader /> : "Sign In"}</button>
                 </div>
             </form>
+            <ToastContainer />
         </>
     )
 }

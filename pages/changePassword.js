@@ -1,14 +1,14 @@
 import Head from "next/head";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import SignUp from "../components/signUp";
+import ChangePasswordForm from "../components/changePasswordForm";
 import PopupWidget from "../components/popupWidget";
 
-const SignUpPage = () => {
+const ChangePassword = () => {
   return (
     <>
       <Head>
-        <title>Expert Corner - Sign Up</title>
+        <title>Expert Corner - Change Password</title>
         <meta
           name="description"
           content="Find the best service providers in the Industry"
@@ -16,11 +16,11 @@ const SignUpPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <SignUp />
+      <ChangePasswordForm />
       <Footer />
       <PopupWidget />
     </>
   );
 }
 
-export default SignUpPage;
+export default ChangePassword;

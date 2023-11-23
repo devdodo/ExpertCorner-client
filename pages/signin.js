@@ -16,7 +16,7 @@ const SignIn = () => {
         <title>Expert Corner - SignIn</title>
         <meta
           name="description"
-          content="Nextly is a free landing page template built with next.js & Tailwind CSS"
+          content="Find the best service providers in the Industry"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>

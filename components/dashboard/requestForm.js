@@ -85,7 +85,7 @@ const RequestForm = () => {
 
         if(startDate !== "" && endDate !== "" && service !== "" && description !== "" && duration !== 0 && vendor !== "" && specialRequest !== ""){
             getPrice(vendor)
-
+            
             const totalPrice = parseInt(duration) * parseInt(price);
 
                 const data = {
