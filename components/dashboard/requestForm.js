@@ -72,7 +72,9 @@ const RequestForm = () => {
       
         if (error) {
           console.error(error);
-          throw new Error("Vendor not found");
+          toast.success("No vendor found", {
+            position: toast.POSITION.TOP_CENTER
+        });
         }
 
         setPrice(data[0].service_charge);
@@ -86,7 +88,11 @@ const RequestForm = () => {
         if(startDate !== "" && endDate !== "" && service !== "" && description !== "" && duration !== 0 && vendor !== "" && specialRequest !== ""){
             getPrice(vendor)
             
-            const totalPrice = parseInt(duration) * parseInt(price);
+            const total = parseInt(duration) * parseInt(price);
+
+            // console.log(duration)
+            // console.log(price)
+            console.log(total)
 
                 const data = {
                     actualStart: startDate.toLocaleDateString(),
@@ -97,9 +103,9 @@ const RequestForm = () => {
                     taskDescription: description,
                     serviceId: service,
                     numDays: duration,
-                    totalPrice: totalPrice,
+                    totalPrice: total,
                     isPaid: false,
-                    regPrice: 0,
+                    regPrice: total,
                     vendorId: vendor
                 }
 
