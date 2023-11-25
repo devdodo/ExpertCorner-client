@@ -36,11 +36,11 @@ const Faq = () => {
 const faqdata = [
   {
     question: "What kind of Service can I get on this platform?",
-    answer: "You can get services cutting across different sectors.",
+    answer: " Expert Corner provides you with seamless connection with a different professional service providers (vendors) in any field your choice such as: Lawyers, Architects, Painters, Teachers, Software engineers, Tillers, Fashion designers, Caterers, Construction engineers etc.",
   },
   {
     question: "Can I use it in a commercial project?",
-    answer: "Yes, this you can.",
+    answer: "No, but you can advertise your product and services on our websites by contacting our customer support center.",
   },
   {
     question: "What is your refund policy? ",
@@ -50,7 +50,7 @@ const faqdata = [
   {
     question: "Do you offer technical support? ",
     answer:
-      "No, we don't offer technical support for free downloads. Please purchase a support plan to get 6 months of support.",
+      "Yes we do.",
   },
 ];
 
