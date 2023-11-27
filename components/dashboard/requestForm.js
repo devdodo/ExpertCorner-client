@@ -40,7 +40,7 @@ const RequestForm = () => {
       
         if (error) {
           console.error(error);
-          throw new Error("Services not found");
+          return
         }
         
         setServiceList(data);
@@ -57,7 +57,9 @@ const RequestForm = () => {
       
         if (error) {
           console.error(error);
-          throw new Error("Vendor not found");
+          toast.error("No vendor found", {
+            position: toast.POSITION.TOP_CENTER
+        });
         }
         
         setVendorList(data);
@@ -72,7 +74,7 @@ const RequestForm = () => {
       
         if (error) {
           console.error(error);
-          toast.success("No vendor found", {
+          toast.error("No vendor found", {
             position: toast.POSITION.TOP_CENTER
         });
         }

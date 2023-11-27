@@ -12,7 +12,7 @@ export async function signup({ fullName, email, password }) {
     },
   });
 
-  if (error) throw new Error(error.message);
+  if (error) return;
 
   return data;
 }
@@ -23,10 +23,11 @@ export async function login({ email, password }) {
     password,
   });
 
-  if (error) throw new Error(error.message);
+  if (error) return;
 
   return data;
 }
+
 
 export async function getCurrentUser() {
   const { data: session } = await supabase.auth.getSession();
@@ -34,13 +35,13 @@ export async function getCurrentUser() {
 
   const { data, error } = await supabase.auth.getUser();
 
-  if (error) throw new Error(error.message);
+  if (error) return;
   return data?.user;
 }
 
 export async function logout() {
   const { error } = await supabase.auth.signOut();
-  if (error) throw new Error(error.message);
+  if (error) return;
 }
 
 export async function updateCurrentUser({ password, fullName, avatar }) {
@@ -51,7 +52,7 @@ export async function updateCurrentUser({ password, fullName, avatar }) {
 
   const { data, error } = await supabase.auth.updateUser(updateData);
 
-  if (error) throw new Error(error.message);
+  if (error) return;
   if (!avatar) return data;
 
   // 2. Upload the avatar image
@@ -61,7 +62,7 @@ export async function updateCurrentUser({ password, fullName, avatar }) {
     .from("avatars")
     .upload(fileName, avatar);
 
-  if (storageError) throw new Error(storageError.message);
+  if (storageError) return;
 
   // 3. Update avatar in the user
   const { data: updatedUser, error: error2 } = await supabase.auth.updateUser({
@@ -70,6 +71,6 @@ export async function updateCurrentUser({ password, fullName, avatar }) {
     },
   });
 
-  if (error2) throw new Error(error2.message);
+  if (error2) return;
   return updatedUser;
 }

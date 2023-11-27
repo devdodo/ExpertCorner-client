@@ -5,7 +5,7 @@ import RequestTable from '../requestTable';
 
 const Home = ({user, index}) => {
     return(
-        <div className=" w-full h-screen bg-gray-100">
+        <div className=" w-full h-[100%] bg-gray-100">
             <div className="flex">
                 <div className="aside">
                     <Aside index={index} />

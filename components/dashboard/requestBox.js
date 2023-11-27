@@ -4,7 +4,8 @@ import { format, isToday } from "date-fns";
 import supabase from "../../services/supabase";
 
 const RequestBox = ({requestId}) => {
-    const [requestData, setRequestData] = useState([])
+    const [requestData, setRequestData] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     const getRequest = async (id) => {
         const { data, error } = await supabase
@@ -14,18 +15,30 @@ const RequestBox = ({requestId}) => {
       
         if (error) {
           console.error(error);
-          throw new Error("Request not found"); 
         }
+
+        getPrice(data[0].vendorId);
+    
         setRequestData(data);
+    }
+
+    const getPrice = async (id) => {
+        const { data, error } = await supabase
+          .from("vendors")
+          .select("service_charge")
+          .eq("id", id);
+      
+        if (error) {
+          console.error(error);
+        }
+    
+        setTotalPrice(data);
     }
 
     useEffect(() => {
         getRequest(requestId);
     }, []);
-
-    console.log(requestData, "this is last");
-
-
+    
     return (
         <div className="w-[90%] sm:w-[80%]  mt-9 mb-9 mx-auto">
             {requestData.length > 0 ? 
@@ -74,7 +87,7 @@ const RequestBox = ({requestId}) => {
                     </div>
 
                     <div className={`${requestData[0].status === "unconfirmed"? "bg-yellow-100 text-yellow-600": "bg-green-200 text-green-700"} px-8  py-6 mb-6 rounded flex justify-between`}>
-                        <h3 className="text-xl font-bold">Total Cost: <span className="font-medium">₦ {requestData[0].totalPrice}</span></h3>
+                        <h3 className="text-xl font-bold">Total Cost: <span className="font-medium">₦ {totalPrice.length > 0 ? totalPrice[0].service_charge :"" }</span></h3>
                         <h3 className="text-md font-bold">{requestData[0].status}</h3>
                     </div>
                     <div className="flex justify-end">
