@@ -12,12 +12,9 @@ import Cta from "../components/cta";
 import Faq from "../components/faq";
 import PopupWidget from "../components/popupWidget";
 
-import {
-  Route, Link, Switch 
-} from "react-router-dom";
+import { Route, Link, Switch } from "react-router-dom";
 
-import LandingPage from './landingPage';
-import SingIn from './signIn';
+import LandingPage from "./landingPage";
 
 const Home = () => {
   return (
@@ -27,6 +24,6 @@ const Home = () => {
       </div>
     </>
   );
-}
+};
 
 export default Home;
