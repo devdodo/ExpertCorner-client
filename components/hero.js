@@ -15,24 +15,24 @@ const Hero = () => {
               Get excellent service when you get a worker from our platform, we promise to provide exceptional service. Why not give us a try.
             </p>
 
-            <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row">
-              <input className="appearance-none block w- w-9/12   bg-white text-gray-700 border rounded py-4 px-8 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Search for a service provider..." />
+            <div className="flex sm:flex-row flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center">
+              <input className="appearance-none w-full md:w-10/12 bg-white text-gray-700 border rounded py-4 px-8 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Search for a service provider..." />
               <button
-                className="px-8 py-4 text-lg font-medium text-center text-white bg-indigo-600 rounded-md ">
+                className="w-full md:w-2/12 px-8 py-4 text-lg font-medium text-center text-white bg-indigo-600 rounded-md ">
                 Go
               </button>
             </div>
-            <div className="bages mt-2">
-              <span className="inline-block whitespace-nowrap rounded-full mr-2 border border-1 border-neutral-50 px-[0.65em] py-[0.45em] text-center align-baseline text-1em font-bold leading-none text-white">
+            <div className="bages mt-4">
+              <span className="inline-block whitespace-nowrap rounded-full mr-2 border border-1 border-neutral-50 px-[0.65em] py-[0.45em] text-center align-baseline text-xs font-bold leading-none text-white">
                 Light
               </span>
-              <span className="inline-block whitespace-nowrap rounded-full mr-2 border border-1 border-neutral-50 px-[0.65em] py-[0.45em] text-center align-baseline text-1em font-bold leading-none text-white">
+              <span className="inline-block whitespace-nowrap rounded-full mr-2 border border-1 border-neutral-50 px-[0.65em] py-[0.45em] text-center align-baseline text-xs font-bold leading-none text-white">
                 Barber
               </span>
-              <span className="inline-block whitespace-nowrap rounded-full mr-2 border border-1 border-neutral-50 px-[0.65em] py-[0.45em] text-center align-baseline text-1em font-bold leading-none text-white">
+              <span className="inline-block whitespace-nowrap rounded-full mr-2 border border-1 border-neutral-50 px-[0.65em] py-[0.45em] text-center align-baseline text-xs font-bold leading-none text-white">
                 Engineer
               </span>
-              <span className="inline-block whitespace-nowrap rounded-full mr-2 border border-1 border-neutral-50 px-[0.65em] py-[0.45em] text-center align-baseline text-1em font-bold leading-none text-white">
+              <span className="inline-block whitespace-nowrap rounded-full mr-2 border border-1 border-neutral-50 px-[0.65em] py-[0.45em] text-center align-baseline text-xs font-bold leading-none text-white">
                 Software Developer
               </span>
             </div>

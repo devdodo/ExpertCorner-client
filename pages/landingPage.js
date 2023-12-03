@@ -6,9 +6,7 @@ import SectionTitle from "../components/sectionTitle";
 import { benefitOne, benefitTwo } from "../components/data";
 import Benefits from "../components/benefits";
 import Footer from "../components/footer";
-import ChooseUs from "../components/chooseUs";
 import Testimonials from "../components/testimonials";
-import Cta from "../components/cta";
 import Faq from "../components/faq";
 import PopupWidget from "../components/popupWidget";
 
@@ -21,7 +19,7 @@ const LandingPage = () => {
           name="description"
           content="Find the best service providers in the Industry"
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <Navbar />
       <Hero />

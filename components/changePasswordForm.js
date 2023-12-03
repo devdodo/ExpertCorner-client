@@ -14,7 +14,7 @@ const ChangePasswordForm = () => {
                         <p className="mt-10 text-center text-sm text-gray-500">
                             Enter your new password below
                         </p>
-                        <div className="mt-2 sm:mx-auto sm:w-full sm:max-w-sm">
+                        <div className="mt-2 sm:mx-auto sm:w-full sm:max-w-sm dark:text-white">
                             <NewPasswordForm />
                         </div>
                     </div>

@@ -124,7 +124,7 @@ const SingUpForm = () => {
 
                 <div class="flex items-center mb-4">
                     <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                    <label htmlFor="default-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Accept Terms and Conditions</label>
+                    <label htmlFor="default-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-white">Accept Terms and Conditions</label>
                 </div>
                 <div>
                     <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 py-4 px-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{loading ? <Loader /> : "Sign Up"}</button>

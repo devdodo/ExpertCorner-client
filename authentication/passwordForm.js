@@ -55,7 +55,7 @@ const PasswordForm = () => {
                 
                 <div>
                     <div className="mt-4 mb-4">
-                        <label htmlFor="email" className="block text-md font-medium leading-6 text-gray-700 mb-2">Email address</label>
+                        <label htmlFor="email" className="block text-md font-medium leading-6 text-gray-700 dark:text-white mb-2">Email address</label>
                         <input name="email" type="email" className="w-full rounded appearance-none bg-white text-gray-700 border py-4 px-4 leading-tight focus:outline-none focus:bg-white" placeholder="Enter email Address..." value={email} onChange={(e) => setEmail(e.target.value)} />
                     </div>
                 </div>

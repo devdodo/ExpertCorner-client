@@ -29,7 +29,7 @@ const RequestForm = () => {
       
         if (error) {
           console.error(error);
-          throw new Error("Request not found"); 
+          return;
         }
         console.log(data, "this is first");
 

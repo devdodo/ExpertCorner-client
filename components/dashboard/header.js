@@ -79,7 +79,7 @@ const Header = () => {
                         </div>
                     </div>
                     <div className="pt-3 block md:hidden">
-                        <FaBars className="text-3xl" onClick={toggleNav} />
+                        <FaBars className="text-3xl text-black" onClick={toggleNav} />
                     </div>
                 </div>
                 

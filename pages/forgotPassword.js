@@ -13,7 +13,7 @@ const ForgotPassword = () => {
           name="description"
           content="Find the best service providers in the Industry"
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <Navbar />
       <ForgotPasswordForm />

@@ -9,7 +9,7 @@ const SignIn = () => {
         <>
         <Head>
             <title>Expert Corner - Client Dashboard</title>
-            <link rel="icon" href="/favicon.ico" />
+            <link rel="icon" href="/favicon.png" />
         </Head>
         <RequestView user={user} index={1} />
         </>

@@ -33,20 +33,20 @@ const ContactSection = (props) => {
           <form className="space-y-6 w-full" onSubmit={handleSubmit}>
                 <div>
                     <div className="mt-4 mb-4">
-                        <label htmlFor="fullname" className="block text-md font-medium leading-6 text-gray-700 mb-2">Full Name</label>
+                        <label htmlFor="fullname" className="block text-md font-medium leading-6 text-gray-700 dark:text-white mb-2">Full Name</label>
                         <input name="fullname" type="text" className="w-full rounded appearance-none bg-white text-gray-700 border py-4 px-4 leading-tight focus:outline-none focus:bg-white" placeholder="Enter your fullname..." onChange={(e) => setFullName(e.target.value)} />
                     </div>
                 </div>
 
                 <div>
                     <div className="mt-4 mb-4">
-                        <label htmlFor="email" className="block text-md font-medium leading-6 text-gray-700 mb-2">Email address</label>
+                        <label htmlFor="email" className="block text-md font-medium leading-6 text-gray-700 dark:text-white mb-2">Email address</label>
                         <input name="email" type="email" className="w-full rounded appearance-none bg-white text-gray-700 border py-4 px-4 leading-tight focus:outline-none focus:bg-white" placeholder="Enter email Address..." onChange={(e) => setEmail(e.target.value)} />
                     </div>
                 </div>
 
                 <div className="mt-4 mb-4">
-                    <label htmlFor="message" className="block text-md font-medium leading-6 text-gray-700 mb-2">Message</label>
+                    <label htmlFor="message" className="block text-md font-medium leading-6 text-gray-700 dark:text-white mb-2">Message</label>
                     <textarea name="message" type="message" className="w-full rounded appearance-none bg-white text-gray-700 border py-4 px-4 leading-tight focus:outline-none focus:bg-white"  placeholder="Enter message..." onChange={(e) => setPassword(e.target.value)}></textarea>
                 </div>
 
