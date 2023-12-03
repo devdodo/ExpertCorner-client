@@ -5,10 +5,13 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../utilities/slices/userSlice";
 import { useRouter } from "next/router";
 import { FaCalendar, FaHome, FaUser, FaCog, FaSignOutAlt } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { logout } from "../../utilities/slices/userSlice";
 
 const Header = () => {
     const user = useSelector(selectUser);
     const checkAuth = user.isAuthenticated;
+    const dispatch = useDispatch();
     const router = useRouter();
     const [toggle, setToggle] = useState(false) 
 
