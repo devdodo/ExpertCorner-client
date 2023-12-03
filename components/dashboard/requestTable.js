@@ -35,7 +35,7 @@ const RequestTable = () => {
         <div className="w-[90%] sm:w-[80%]  my-9 mx-auto">
             <div className="relative overflow-x-auto rounded border border-slate-200">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead className="text-md text-white uppercase bg-indigo-700 dark:bg-gray-700 dark:text-gray-400">
+                    <thead className="text-md text-white uppercase bg-indigo-700">
                         <tr>
                             <th scope="col" className="px-6 py-6">
                                 Service Name
@@ -61,8 +61,8 @@ const RequestTable = () => {
                         <tbody>
                         {
                             requestRows.map((row, index) => (
-                                <tr key={index} className="bg-white border-b dark:bg-gray-700 dark:border-gray-700 font-bold">
-                                    <th scope="row" className="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                                <tr key={index} className="bg-white border-b  dark:border-gray-700 font-bold">
+                                    <th scope="row" className="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-gray-700">
                                         {row.cabins.name}
                                     </th>
                                     <td className="px-6 py-4">
