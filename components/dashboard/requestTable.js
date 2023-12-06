@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import { selectUser } from "../../utilities/slices/userSlice";
 import Link from 'next/link';
+import Pagination from './Pagination';
 import supabase from "../../services/supabase";
 
 const RequestTable = () => {
     const userData = useSelector(selectUser);
     const [requestRows, setRequestRows] = useState([])
-    const {user, isAuthenticated} = userData;
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postsPerPage] = useState(5)
+    const {user, isAuthenticated} = userData
     const [{id}] = user
     const [userId, setUserId] = useState(id)
 
@@ -30,7 +33,14 @@ const RequestTable = () => {
         getRequest(userId);
 
     }, []);
-    
+
+    // Pagination Logic
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage
+    const currentPosts = requestRows.slice(indexOfFirstPost, indexOfLastPost);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
     return (
         <div className="w-[90%] sm:w-[80%]  my-9 mx-auto">
             <div className="relative overflow-x-auto rounded border border-slate-200">
@@ -57,10 +67,11 @@ const RequestTable = () => {
                             </th>
                         </tr>
                     </thead>
-                    {requestRows.length !== 0 ?
+                    {currentPosts.length !== 0 ?
+                    <>
                         <tbody>
                         {
-                            requestRows.map((row, index) => (
+                            currentPosts.map((row, index) => (
                                 <tr key={index} className="bg-white border-b  dark:border-gray-700 font-bold">
                                     <th scope="row" className="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-gray-700">
                                         {row.cabins.name}
@@ -86,6 +97,8 @@ const RequestTable = () => {
                             ))
                         }
                         </tbody>
+                        <Pagination postsPerPage={postsPerPage} totalPosts={requestRows.length} paginate={paginate} currentPage={currentPage} />
+                        </>
                         : ""
                         }
                 </table>
