@@ -11,6 +11,7 @@ const SingUpForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [checked, setChecked] = useState(false);
     const [loginError, setLoginError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [loading, setLoading] = useState(false);
@@ -50,8 +51,31 @@ const SingUpForm = () => {
             return;
         }
 
+        let strRegex = new RegExp(/[^a-zA-Z0-9]/);
+        let result = strRegex.test(password);
+
+        if (!result) {
+            toast.error("Password must contain number, uppercase, lowercase and special characters!", {
+                position: toast.POSITION.TOP_CENTER
+            });
+            setLoginError(true);
+            setLoading(false);
+
+            return;
+        }
+
         if (password !== confirmPassword) {
             toast.error("Passwords do not match!", {
+                position: toast.POSITION.TOP_CENTER
+            });
+            setLoginError(true);
+            setLoading(false);
+
+            return;
+        }
+
+        if (!checked) {
+            toast.error("Accept terms and Conditions", {
                 position: toast.POSITION.TOP_CENTER
             });
             setLoginError(true);
@@ -123,7 +147,7 @@ const SingUpForm = () => {
                 </div>
 
                 <div class="flex items-center mb-4">
-                    <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                    <input id="default-checkbox" type="checkbox" onChange={ e => e.target.checked ? setChecked(true) : setChecked(false)} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                     <label htmlFor="default-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-white">Accept Terms and Conditions</label>
                 </div>
                 <div>
