@@ -18,11 +18,12 @@ const RequestForm = () => {
     const [specialRequest, setSpecialRequest] = useState("")
     const [duration, setDuration] = useState(0)
     const [price, setPrice] = useState(0)
+    const [totalPrice, setTotalPrice] = useState(0)
     const [serviceList, setServiceList] = useState([])
     const [vendorList, setVendorList] = useState([])
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false)
-    const [errorMessage, setErrorMessage] = useState("")
+    const [vendorDetails, setVendorDetails] = useState([])
 
     const {user, isAuthenticated} = userData;
     const [{id}] = user;
@@ -39,7 +40,6 @@ const RequestForm = () => {
           .select("id, name");
       
         if (error) {
-          console.error(error);
           return
         }
         
@@ -56,7 +56,6 @@ const RequestForm = () => {
           .eq("serviceTag", serviceId);
       
         if (error) {
-          console.error(error);
           toast.error("No vendor found", {
             position: toast.POSITION.TOP_CENTER
         });
@@ -73,13 +72,17 @@ const RequestForm = () => {
           .eq("id", id);
       
         if (error) {
-          console.error(error);
           toast.error("No vendor found", {
             position: toast.POSITION.TOP_CENTER
         });
         }
 
         setPrice(data[0].service_charge);
+        setTotalPrice(data[0].service_charge)
+    }
+
+    const handleVendorPrice = (vendorId) => {
+        getPrice(vendorId)
     }
 
     const handleSubmit = async (e) => {
@@ -91,10 +94,6 @@ const RequestForm = () => {
             getPrice(vendor)
             
             const total = parseInt(duration) * parseInt(price);
-
-            // console.log(duration)
-            // console.log(price)
-            console.log(total)
 
                 const data = {
                     actualStart: startDate.toLocaleDateString(),
@@ -116,9 +115,7 @@ const RequestForm = () => {
                     toast.error(error.message, {
                         position: toast.POSITION.TOP_CENTER
                     });
-                    console.log(error.message);
                 }else{
-                    console.log("Insertion successful");
                     toast.success("Successful Request.", {
                         position: toast.POSITION.TOP_CENTER
                     });
@@ -172,10 +169,10 @@ const RequestForm = () => {
                                 Choose Vendor
                             </label>
                             <div className="relative">
-                                <select className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="grid-state" onChange={(e) => setVendor(e.target.value)}>
+                                <select className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="grid-state" onChange={(e) => setVendor(e.target.value)} onBlur={(e) => handleVendorPrice(e.target.value)}>
                                     <option value="">Choose a Vendor</option>
                                     {vendorList.map((vendor, index) => (
-                                        <option key={index} value={vendor.id}>{vendor.nameOfVendor} - #{vendor.service_charge} - {vendor.maxCapacityTag} hours per day</option>
+                                        <option key={index} value={vendor.id}>{vendor.nameOfVendor} - ₦ {vendor.service_charge} - {vendor.maxCapacityTag} hours per day</option>
                                     ))}
                                 </select>
                                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -237,7 +234,11 @@ const RequestForm = () => {
                         <label className="block text-gray-500 text-sm font-bold mb-2" htmlFor="grid-city">
                             Number of Days
                         </label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="grid-city" type="number" placeholder="0" onChange={(e) => setDuration(e.target.value)} />
+                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="grid-city" type="number" placeholder="0" onChange={(e) => {setDuration(e.target.value); e.target.value > 0 ?setTotalPrice(price*e.target.value): "" }} />
+                        </div>
+                        <div className="w-full md:w-2/3 px-3 mb-6 md:mb-0">
+                        <h3 className="block text-gray-500 text-sm font-bold mb-2">Total:</h3>
+                        <h3 className="block text-gray-700 text-4xl font-bold">₦ {totalPrice}</h3>
                         </div>
                     </div>
                     <div className="mt-4">
