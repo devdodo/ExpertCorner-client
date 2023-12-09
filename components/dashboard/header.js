@@ -23,6 +23,8 @@ const Header = () => {
         }
     }, [])
 
+    console.log(user);
+
     const handleLogout = () => {
         dispatch(logout());
         router.push("/signin", "/signin");
@@ -69,7 +71,7 @@ const Header = () => {
             <div className="fixed w-full h-min bg-white py-2 px-6 border-b border-b-slate-200 z-40">
                 <div className="w-full md:w-[75%] flex justify-between md:justify-end">
                     <div className="pt-3 block md:hidden">
-                        <Link href="index.html" className="w-full text-3xl flex justify-center">
+                        <Link href="/dashboard" className="w-full text-3xl flex justify-center">
                             <img src="../../img/new-logo.png" className="w-28" />
                         </Link>
                     </div>

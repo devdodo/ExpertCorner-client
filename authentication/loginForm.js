@@ -36,7 +36,7 @@ const LoginForm = () => {
             if(user.user != null){
                 const { data, error } = await supabase
                 .from("clients")
-                .select("id,email,fullName,UID")
+                .select("id,email,fullName,UID,NIN")
                 .eq("email", email);
             
                 if (error) {

@@ -18,7 +18,8 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div>
               <Link href="/">
-                <img src="/img/new-logo.png" className="w-28" />
+                <img src="/img/new-logo.png" className="w-28 block dark:hidden" />
+                <img src="/img/new-logo-dark.png" className="w-28 hidden dark:block" />
               </Link>
             </div>
 

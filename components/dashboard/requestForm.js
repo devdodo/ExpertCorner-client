@@ -2,14 +2,15 @@ import { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import supabase from "../../services/supabase";
-import { useSelector } from "react-redux";
 import Loader from "../../utilities/loader";
+import { useSelector } from "react-redux";
 import { selectUser } from "../../utilities/slices/userSlice";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const RequestForm = () => {
     const userData = useSelector(selectUser);
+    const [userNIN] = useState(userData.user[0].NIN)
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("")
     const [service, setService] = useState("")
@@ -24,6 +25,8 @@ const RequestForm = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false)
     const [vendorDetails, setVendorDetails] = useState([])
+
+    console.log();
 
     const {user, isAuthenticated} = userData;
     const [{id}] = user;
@@ -144,6 +147,7 @@ const RequestForm = () => {
     return (
         <div className="w-[90%] sm:w-[80%]  mt-9 mx-auto">
             <div className="bg-white p-8 rounded overflow-hidden">
+                {userNIN === ""?<div><p className="block text-gray-700 text-md font-bold mb-2">Kindly update Profile NIN and Phone Number to request for services!</p></div> :
                 <form className="w-full max-w-lg" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap -mx-3 mb-6">
                         <div className="w-full px-3">
@@ -247,6 +251,7 @@ const RequestForm = () => {
                         </button>
                     </div>
                 </form>
+                }
             </div>
             <ToastContainer />
         </div>

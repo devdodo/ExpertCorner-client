@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { format, isToday } from "date-fns";
 import Loader from "../../utilities/loader";
 import supabase from "../../services/supabase";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../utilities/slices/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { login, selectUser } from "../../utilities/slices/userSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -16,6 +16,8 @@ const RequestForm = () => {
   const [nin, setNin] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const dispatch = useDispatch();
 
   const { user, isAuthenticated } = userSlice;
   const [{ id }] = user;
@@ -45,6 +47,21 @@ const RequestForm = () => {
     console.log(userData, "this is second");
   }, []);
 
+  const updateClient = async (id) => {
+    const { data, error } = await supabase
+    .from("clients")
+    .select("id,email,fullName,UID,NIN")
+    .eq("id", id);
+
+    if (error) {
+    console.error(error);
+    toast.error("Invalid username and password", {
+        position: toast.POSITION.TOP_CENTER
+    });
+    }
+
+    dispatch(login(data))
+  }
   const updateTable = async (obj, id) => {
     const { data, error } = await supabase
       .from("clients")
@@ -61,6 +78,7 @@ const RequestForm = () => {
       });
     }
 
+    updateClient(id);
     setLoading(false);
     toast.success("Profile updated successfully.", {
       position: toast.POSITION.TOP_CENTER,

@@ -20,7 +20,8 @@ const Navbar = () => {
             <>
               <div className="flex flex-wrap items-center justify-between w-full lg:w-auto">
                 <Link href="/">
-                  <img src="/img/new-logo.png" className="w-28" />
+                  <img src="/img/new-logo.png" className="w-28 block dark:hidden" />
+                  <img src="/img/new-logo-dark.png" className="w-28 hidden dark:block" />
                 </Link>
 
                 <Disclosure.Button
