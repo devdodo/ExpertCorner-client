@@ -7,6 +7,8 @@ import supabase from "../services/supabase";
 
 const Hero = () => {
   const [services, setServices] = useState([]);
+  const [filteredList, setFilteredList] = useState([])
+  const [inputText, setInputText] = useState("");
 
   const getServiceList = async () => {
     const { data, error } = await supabase.from("cabins").select("id, name");
@@ -15,9 +17,24 @@ const Hero = () => {
       return;
     }
 
-    console.log(data);
     setServices(data);
   };
+
+  const handleInputChange = (e) => {
+    e.preventDefault()
+    setInputText(e.target.value)
+    let searchText = e.target.value
+
+    if(searchText!== ""){
+      const newArray = services.filter(function (str) {
+        return str.name.toLowerCase().includes(searchText)
+      })
+      setFilteredList(newArray)
+    }else{
+      setFilteredList([])
+    }
+  }
+
 
   useEffect(() => {
     getServiceList();
@@ -41,16 +58,18 @@ const Hero = () => {
                 className="appearance-none w-full md:w-10/12 bg-white text-gray-700 border rounded py-4 px-8 leading-tight focus:outline-none focus:bg-white"
                 type="text"
                 placeholder="Search for a service provider..."
+                value={inputText}
+                onChange={handleInputChange}
               />
               {/* <button className="w-full md:w-2/12 px-8 py-4 text-lg font-medium text-center text-white bg-indigo-600 rounded-md ">
                 Go
               </button> */}
             </div>
-            <div className="bg-white hidden w-full md:w-10/12 rounded py-4 px-8 mt-1">
+            <div className={`bg-white ${inputText === ""? "hidden": ""} w-full md:w-10/12 rounded py-4 px-8 mt-1`}>
               {services.length > 0
-                ? services.map((service) => (
+                ? filteredList.map((service) => (
                     <Link href="/signin" className="py-3 w-[100%]">
-                      <div className="py-2 border-b border-b-gray-400">
+                      <div className="py-3 text-sm text-gray-500">
                         {service.name}
                       </div>
                     </Link>
