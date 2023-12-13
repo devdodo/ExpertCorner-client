@@ -46,7 +46,7 @@ const Hero = () => {
                 Go
               </button> */}
             </div>
-            <div className="bg-white w-full md:w-10/12 rounded py-4 px-8 mt-1">
+            <div className="bg-white hidden w-full md:w-10/12 rounded py-4 px-8 mt-1">
               {services.length > 0
                 ? services.map((service) => (
                     <Link href="/signin" className="py-3 w-[100%]">
