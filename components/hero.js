@@ -7,7 +7,7 @@ import supabase from "../services/supabase";
 
 const Hero = () => {
   const [services, setServices] = useState([]);
-  const [filteredList, setFilteredList] = useState([])
+  const [filteredList, setFilteredList] = useState([]);
   const [inputText, setInputText] = useState("");
 
   const getServiceList = async () => {
@@ -21,20 +21,19 @@ const Hero = () => {
   };
 
   const handleInputChange = (e) => {
-    e.preventDefault()
-    setInputText(e.target.value)
-    let searchText = e.target.value
+    e.preventDefault();
+    setInputText(e.target.value);
+    let searchText = e.target.value;
 
-    if(searchText!== ""){
+    if (searchText !== "") {
       const newArray = services.filter(function (str) {
-        return str.name.toLowerCase().includes(searchText)
-      })
-      setFilteredList(newArray)
-    }else{
-      setFilteredList([])
+        return str.name.toLowerCase().includes(searchText.toLowerCase());
+      });
+      setFilteredList(newArray);
+    } else {
+      setFilteredList([]);
     }
-  }
-
+  };
 
   useEffect(() => {
     getServiceList();
@@ -65,7 +64,11 @@ const Hero = () => {
                 Go
               </button> */}
             </div>
-            <div className={`bg-white ${inputText === ""? "hidden": ""} w-full md:w-10/12 rounded py-4 px-8 mt-1`}>
+            <div
+              className={`bg-white ${
+                inputText === "" ? "hidden" : ""
+              } w-full md:w-10/12 rounded py-4 px-8 mt-1`}
+            >
               {services.length > 0
                 ? filteredList.map((service) => (
                     <Link href="/signin" className="py-3 w-[100%]">
