@@ -49,19 +49,19 @@ const RequestForm = () => {
 
   const updateClient = async (id) => {
     const { data, error } = await supabase
-    .from("clients")
-    .select("id,email,fullName,UID,NIN")
-    .eq("id", id);
+      .from("clients")
+      .select("id,email,fullName,UID,NIN")
+      .eq("id", id);
 
     if (error) {
-    console.error(error);
-    toast.error("Invalid username and password", {
-        position: toast.POSITION.TOP_CENTER
-    });
+      console.error(error);
+      toast.error("Invalid username and password", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
 
-    dispatch(login(data))
-  }
+    dispatch(login(data));
+  };
   const updateTable = async (obj, id) => {
     const { data, error } = await supabase
       .from("clients")
@@ -221,7 +221,10 @@ const RequestForm = () => {
           </form>
         </div>
       ) : (
-        "Waiting"
+        <div className="flex justify-center">
+          <Loader />
+        </div>
+        // "Waiting"
       )}
       <ToastContainer />
     </div>
