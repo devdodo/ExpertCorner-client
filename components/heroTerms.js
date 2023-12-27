@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Container from "./container";
-import heroImg from "../public/img/about-us.jpg";
+import heroImg from "../public/img/terms.png";
 
 const HeroTerms = () => {
   return (
