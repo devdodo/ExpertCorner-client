@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React, { useState } from "react";
 import Container from "./container";
 import supabase from "../services/supabase";
@@ -77,15 +78,15 @@ const ContactSection = (props) => {
               </h3>
                 <div className="flex max-w-2xl text-lg leading-normal text-gray-500 lg:text-xl xl:text-xl dark:text-gray-300">
                     <div className="w-20">Phone:</div>
-                    <div className="">+234 1234 567 999</div>
+                    <div className="">+234 9020 180 184</div>
                 </div>
                 <div className="flex max-w-2xl text-lg leading-normal text-gray-500 lg:text-xl xl:text-xl dark:text-gray-300">
                     <div className="w-20">Phone:</div>
-                    <div className="">+234 1234 567 999</div>
+                    <div className="">+234 8106 847 908</div>
                 </div>
                 <div className="flex max-w-2xl text-lg leading-normal text-gray-500 lg:text-xl xl:text-xl dark:text-gray-300">
-                    <div className="w-20">Email:</div>
-                    <div className="">support@expertscorner.com</div>
+                    <div className="w-20">Whatsapp:</div>
+                    <div className=""><Link href="https://wa.me/2348106847908">Expert Corner</Link></div>
                 </div>
                 <div className="flex max-w-2xl text-lg leading-normal text-gray-500 lg:text-xl xl:text-xl dark:text-gray-300">
                     <div className="w-20">Email:</div>
