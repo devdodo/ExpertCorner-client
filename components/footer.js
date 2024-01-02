@@ -62,7 +62,7 @@ export default function Footer() {
                 <span className="sr-only">Twitter</span>
                 <Twitter />
               </a>
-              <a href="https://facebook.com/" target="_blank" rel="noopener">
+              <a href="https://facebook.com/profile.php?id=61554796831632" target="_blank" rel="noopener">
                 <span className="sr-only">Facebook</span>
                 <Facebook />
               </a>
