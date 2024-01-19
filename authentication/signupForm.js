@@ -95,8 +95,6 @@ const SingUpForm = () => {
 
     try {
       const user = await signupApi({ fullName, email, password });
-      console.log("Successful Sign up");
-      console.log(user.user);
 
       const data = {
         fullName,
@@ -106,16 +104,26 @@ const SingUpForm = () => {
       const { error } = await supabase.from("clients").insert(data);
       if (error) {
         setLoading(false);
-        console.log(error.message);
-      } else {
-        toast.success("User created successfully", {
+        toast.error(`Sign Up failed! ${error.message}`, {
           position: toast.POSITION.TOP_CENTER,
         });
-        router.push("/signin", { replace: true });
-      }
+        console.log(error.message);
+      } else {
+        setEmail("");
+        setFullName("");
+        setPassword("");
+        setConfirmPassword("");
+        setLoading(false);
 
-      // Handle successful login, e.g., store user data in state or context
-      // queryClient.setQueryData(["user"], user.user);
+        toast.success(
+          "User created successfully, Complete the signup with the link in your email.",
+          {
+            position: toast.POSITION.TOP_CENTER,
+          }
+        );
+
+        // router.push("/signin", { replace: true });
+      }
     } catch (err) {
       toast.error("User creation was unsuccessful!", {
         position: toast.POSITION.TOP_CENTER,
@@ -147,6 +155,7 @@ const SingUpForm = () => {
               type="text"
               className="w-full rounded appearance-none bg-white text-gray-700 border py-4 px-4 leading-tight focus:outline-none focus:bg-white"
               placeholder="Enter your fullname..."
+              value={fullName}
               onChange={(e) => setFullName(e.target.value)}
             />
           </div>
@@ -165,6 +174,7 @@ const SingUpForm = () => {
               type="email"
               className="w-full rounded appearance-none bg-white text-gray-700 border py-4 px-4 leading-tight focus:outline-none focus:bg-white"
               placeholder="Enter email Address..."
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -182,6 +192,7 @@ const SingUpForm = () => {
             type="password"
             className="w-full rounded appearance-none bg-white text-gray-700 border py-4 px-4 leading-tight focus:outline-none focus:bg-white"
             placeholder="Enter password..."
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
@@ -198,6 +209,7 @@ const SingUpForm = () => {
             type="password"
             className="w-full rounded appearance-none bg-white text-gray-700 border py-4 px-4 leading-tight focus:outline-none focus:bg-white"
             placeholder="Enter password..."
+            value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>

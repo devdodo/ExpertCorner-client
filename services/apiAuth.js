@@ -9,6 +9,7 @@ export async function signup({ fullName, email, password }) {
         fullName,
         avatar: "",
       },
+      emailRedirectTo: "http://expertscorner.ng/signin",
     },
   });
 
@@ -27,7 +28,6 @@ export async function login({ email, password }) {
 
   return data;
 }
-
 
 export async function getCurrentUser() {
   const { data: session } = await supabase.auth.getSession();
